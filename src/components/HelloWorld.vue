@@ -1,19 +1,24 @@
 <template>
-  <h1>{{ msg }}</h1>
-  <button @click="count++">count is: {{ count }}</button>
-  <p>Edit <code>components/HelloWorld.vue</code> to test hot module replacement.</p>
+  <div class="alert alert-primary">
+    <h1>{{ title }}</h1>
+    <p>{{ msg }}</p>
+  </div>
 </template>
 
 <script>
+import { h, ref } from "vue";
+
 export default {
-  name: 'HelloWorld',
   props: {
-    msg: String
+    title: String,
+    msg: String,
   },
-  data() {
-    return {
-      count: 0
-    }
-  }
-}
+  setup(props) {
+    return () =>
+      h("div", { class: "alert alert-primary" }, [
+        h("h1", props.title),
+        h("p", props.msg),
+      ]);
+  },
+};
 </script>
