@@ -1,24 +1,28 @@
 <template>
   <div class="alert alert-primary">
     <h1>{{ title }}</h1>
-    <p>{{ msg }}</p>
+    <p>{{ data.msg }} ({{ data.count }})</p>
   </div>
 </template>
 
 <script>
-import { h, ref } from "vue";
+import { ref } from "vue";
 
 export default {
   props: {
     title: String,
-    msg: String,
   },
   setup(props) {
-    return () =>
-      h("div", { class: "alert alert-primary" }, [
-        h("h1", props.title),
-        h("p", props.msg),
-      ]);
+    const data = ref({
+      msg: "This is ref-value!",
+      count: 0,
+    });
+    setInterval(() => {
+      data.value.count++;
+    }, 1000);
+    return {
+      data,
+    };
   },
 };
 </script>
