@@ -1,25 +1,21 @@
 <template>
   <div class="alert alert-primary">
     <h1>{{ title }}</h1>
-    <p>{{ data.msg }} ({{ data.count }})</p>
+    <p class="mt-3 h5">{{ data.msg }}</p>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
-
+import { ref, reactive } from "vue";
 export default {
   props: {
     title: String,
   },
-  setup(props) {
-    const data = ref({
+  setup(props, context) {
+    const data = reactive({
       msg: "This is ref-value!",
-      count: 0,
     });
-    setInterval(() => {
-      data.value.count++;
-    }, 1000);
+    data.msg = context.attrs["msg"].toUpperCase();
     return {
       data,
     };
